@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace YokaruUI
 {
     /// <summary>
@@ -78,6 +79,11 @@ namespace YokaruUI
         private void Auth_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("View/Pages/AuthPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btnPlayPause_Click(object sender, RoutedEventArgs e)
+        {
+            //btnPlayPause.Content = 
         }
     }
 }

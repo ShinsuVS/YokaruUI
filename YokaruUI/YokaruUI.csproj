@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="View\Assets\Avatars\avatar-2.png" />
+    <None Remove="View\Assets\Avatars\note.png" />
+    <None Remove="View\Assets\Avatars\note1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +25,15 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Assets\Avatars\note.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="View\Assets\Avatars\note1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
