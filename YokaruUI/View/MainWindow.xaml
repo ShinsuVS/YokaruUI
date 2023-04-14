@@ -10,7 +10,86 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
         ResizeMode="NoResize" WindowState="Normal" MouseLeftButtonDown="dragMe">
+    <Window.Resources>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="1" BorderBrush="White" Background="{DynamicResource ActionIconColor}" Height="4"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#1043f3"  BorderThickness="1" BorderBrush="#2456df" Height="4"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <!--Add name to ellipse to use in  controltemplate triggers-->
+                        <Ellipse x:Name="Ellipse" Height="10" Width="10" Fill="#df24b4"></Ellipse>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#10f34e"></Setter>
+                            </Trigger>
+                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -64,7 +143,7 @@
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
                         <Ellipse Width="40" Height="40" Margin="10 0 0 0">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="Assets/Avatars/avatar-2.png"/>
+                                <ImageBrush x:Name="imgs" ImageSource="Assets/Avatars/avatar-2.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
                         <StackPanel Orientation="Vertical" Margin="8 0 0 0">
@@ -131,8 +210,18 @@
                                 <Button  Content="Название" Foreground="{DynamicResource TextPrimaryColor}" Style="{DynamicResource ButtonLabel}"  FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"  />
                                 <Button Content="Автор" Foreground="{DynamicResource PrimaryGrayColor}" Style="{DynamicResource ButtonLabel}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
                             </StackPanel>
-                        </StackPanel>
-                        <Button Width="40"  Tag="Change" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Heart}" Cursor="Hand"></Button>
+                        </StackPanel >
+                        <Button Width="40"  Tag="Heart" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Heart}" Cursor="Hand"></Button>
+                        <Button Width="40"  Tag="Download" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Dowload}" Cursor="Hand"></Button>
+                        <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Name="CurentTimeTBl" Margin="5" VerticalAlignment="Center" TextAlignment="Center">0:0</TextBlock>
+                                <Slider Margin="5" Width="400"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center"></Slider>
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Margin="5" Name="TotalLenTBl">3:00</TextBlock>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Button Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Volume}" Cursor="Hand"></Button>
                     </StackPanel>
                 </Border>
             </Grid>

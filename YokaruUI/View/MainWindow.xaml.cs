@@ -19,8 +19,11 @@ namespace YokaruUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+   
     public partial class MainWindow : Window
     {
+        public bool stwsd = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -83,7 +86,19 @@ namespace YokaruUI
 
         private void btnPlayPause_Click(object sender, RoutedEventArgs e)
         {
-            //btnPlayPause.Content = 
+            if(stwsd == true)
+            {
+                btnPlayPause.Content = FindResource("Play");
+                stwsd= false;
+            
+            }
+            else
+            {
+                btnPlayPause.Content = FindResource("Pause");
+                stwsd = true;
+            }
+          
+
         }
     }
 }
