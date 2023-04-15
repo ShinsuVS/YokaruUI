@@ -100,5 +100,15 @@ namespace YokaruUI
           
 
         }
+
+        private void rdUsersMusic_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rdSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
