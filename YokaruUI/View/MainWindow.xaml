@@ -19,7 +19,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  BorderThickness="1" BorderBrush="White" Background="{DynamicResource ActionIconColor}" Height="4"/>
+                        <Border  BorderThickness="1" BorderBrush="White" Background="#df24b4 " Height="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -44,10 +44,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
                         <!--Add name to ellipse to use in  controltemplate triggers-->
-                        <Ellipse x:Name="Ellipse" Height="10" Width="10" Fill="#df24b4"></Ellipse>
+                        <Ellipse x:Name="Ellipse" Height="10" Width="10" Fill="#FFFD4985"></Ellipse>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="Ellipse" Property="Fill" Value="#10f34e"></Setter>
+                                <Setter TargetName="Ellipse" Property="Fill" Value="#1043f3"></Setter>
                             </Trigger>
                             
                         </ControlTemplate.Triggers>
@@ -122,11 +122,27 @@
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanelMusicControl">
+                                        <DoubleAnimation Storyboard.TargetName="GridStack" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="800" To="940" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="SliderMusic" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="720" To="860" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
                             </EventTrigger>
                             <EventTrigger RoutedEvent="ToggleButton.Checked">
                                 <BeginStoryboard>
                                     <Storyboard x:Name="ShowStackPanel">
                                         <DoubleAnimation Storyboard.TargetName="gridMenu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="200" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanelMusicControl">
+                                        <DoubleAnimation Storyboard.TargetName="GridStack" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="940" To="800" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="SliderMusic" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="860" To="720" Duration="0:0:0.2">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -160,7 +176,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
 
                 <!-- Start: Button Close | Restore | Minimize -->
@@ -187,43 +203,62 @@
                         <!-- Page Content -->
                     </Frame>
                 </Border>
-                <Border Grid.Row="2" Margin="5" CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-                    <StackPanel Orientation="Horizontal" >
+                <Grid x:Name="GridStack" Grid.Row="2">
+                    <Border  Grid.Row="2" Margin="5" CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+                        <Grid >
+                            <StackPanel Orientation="Vertical" Cursor="">
+                                <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+                                    <StackPanel Height="20" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Name="CurentTimeTBl" Margin="5" VerticalAlignment="Center" TextAlignment="Center">0:00</TextBlock>
+                                        <Slider x:Name="SliderMusic" IsMoveToPointEnabled="True"  Margin="5" Width="860"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center"></Slider>
+                                        <TextBlock TextAlignment="Center" VerticalAlignment="Center" Margin="5" Name="TotalLenTBl">3:00</TextBlock>
+                                    </StackPanel>
+                                </Border>
 
-                        <Button Width="40" Tag="Change" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Next}" Cursor="Hand"></Button>
-                        <Button Name="btnPlayPause" Width="40" Tag="IsPauseButton" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Pause}" Cursor="Hand" Click="btnPlayPause_Click" ></Button>
-                        <Button Width="40" Tag="Change" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Next}" Cursor="Hand" RenderTransformOrigin="0.5,0.5"  >
-                            <Button.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="180"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Button.RenderTransform>
-                        </Button>
-                        <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal" Width="200" Margin="0 0 0 0">
-                            <Image Width="40" Height="40" Margin="10 0 0 0" Source="Assets/Avatars/note1.png">
-                                
-                            </Image>
-                            <StackPanel Orientation="Vertical" Margin="8 0 0 0">
-                                <Button  Content="Название" Foreground="{DynamicResource TextPrimaryColor}" Style="{DynamicResource ButtonLabel}"  FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"  />
-                                <Button Content="Автор" Foreground="{DynamicResource PrimaryGrayColor}" Style="{DynamicResource ButtonLabel}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                <StackPanel    Orientation="Horizontal" >
+
+                                    <Button Width="40" Tag="Change" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Next}" Cursor="Hand"></Button>
+                                    <Button Name="btnPlayPause" Width="40" Tag="IsPauseButton" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Pause}" Cursor="Hand" Click="btnPlayPause_Click" ></Button>
+                                    <Button Width="40" Tag="Change" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Next}" Cursor="Hand" RenderTransformOrigin="0.5,0.5"  >
+                                        <Button.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="180"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Button.RenderTransform>
+                                    </Button>
+                                    <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal" Width="200" Margin="0 0 0 0">
+                                        <Image Width="40" Height="40" Margin="10 0 0 0" Source="Assets/Avatars/note1.png">
+
+                                        </Image>
+                                        <StackPanel Orientation="Vertical" Margin="8 0 0 0">
+                                            <Button  Content="Название" Foreground="{DynamicResource TextPrimaryColor}" Style="{DynamicResource ButtonLabel}"  FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"  />
+                                            <Button Content="Автор" Foreground="{DynamicResource PrimaryGrayColor}" Style="{DynamicResource ButtonLabel}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                        </StackPanel>
+                                    </StackPanel >
+                                    <Button Width="40"  Tag="Heart" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Heart}" Cursor="Hand"></Button>
+                                    <Button Width="40"  Tag="Download" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Dowload}" Cursor="Hand"></Button>
+                                    <Button Width="40"  Tag="Download" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource DeleteTrack}" Cursor="Hand"></Button>
+
+
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel >
-                        <Button Width="40"  Tag="Heart" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Heart}" Cursor="Hand"></Button>
-                        <Button Width="40"  Tag="Download" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Dowload}" Cursor="Hand"></Button>
-                        <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Name="CurentTimeTBl" Margin="5" VerticalAlignment="Center" TextAlignment="Center">0:0</TextBlock>
-                                <Slider Margin="5" Width="400"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center"></Slider>
-                                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Margin="5" Name="TotalLenTBl">3:00</TextBlock>
-                            </StackPanel>
-                        </Border>
+
+
+                            <Button Margin="0 15 0 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource VolumeZero}" Cursor="Hand"></Button>
+                            <Button Margin="0 15 40 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Repeat}" Cursor="Hand"></Button>
+
+                            <Button Margin="0 15 80 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Shuffle}" Cursor="Hand"></Button>
+                            <Button Margin="0 15 120 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Hq}" Cursor="Hand"></Button>
+
+
+                        </Grid>
                         
-                        <Button Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Volume}" Cursor="Hand"></Button>
-                    </StackPanel>
-                </Border>
+                    </Border>
+                </Grid>
+                
             </Grid>
             <!-- Start: GridColumn Rigth -->
         </Grid>
