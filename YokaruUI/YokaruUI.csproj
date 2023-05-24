@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="View\Assets\Avatars\avatar-2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

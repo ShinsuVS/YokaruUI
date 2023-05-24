@@ -13,8 +13,9 @@ namespace YokaruUI
     /// </summary>
     /// 
 
+   
     public partial class App : Application
     {
-       
+        public bool LightTheme = true;
     }
 }

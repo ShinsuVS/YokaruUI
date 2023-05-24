@@ -79,6 +79,8 @@
                                 <Condition Property="Tag" Value="Change"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#5B7FFF"/>
+                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
+
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -86,6 +88,8 @@
                                 <Condition Property="Tag" Value="Heart"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#e5385e"/>
+                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
+
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -93,6 +97,8 @@
                                 <Condition Property="Tag" Value="Download"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#6838e5"/>
+                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                            
 
                         </MultiTrigger>
                         <MultiTrigger>
@@ -101,11 +107,11 @@
                                 <Condition Property="Tag" Value="Volume"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="#6838e5"/>
+                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                            
 
                         </MultiTrigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
-                        </Trigger>
+                        
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -214,5 +220,238 @@
         </Setter>
     </Style>
     <!-- End: VerticalMenuStyle -->
+
+
+    <Style x:Key="SettingsSelectorRadioButtonStyle" TargetType="{x:Type RadioButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryGrayColor}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border x:Name="menuButton"  Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Cursor="">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Selected  -->
+                            <Border x:Name="btnSelected" Grid.ColumnSpan="2"  CornerRadius="4" Width="100" HorizontalAlignment="Right" Cursor=""/>
+
+                            <!-- Indicator -->
+                            <Rectangle Name="Indicator" HorizontalAlignment="Center" Grid.ColumnSpan="2" Width="70" Height="4" VerticalAlignment="Bottom" RadiusX="2" RadiusY="2"/>
+
+                            
+                            <!-- Text -->
+                            <TextBlock x:Name="txtName"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                                                FontWeight="{TemplateBinding FontWeight}"
+                                                FontSize="{TemplateBinding FontSize}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource PrimaryBlueColor}"/>
+                             <!--Optional--> 
+                            <Setter TargetName="Indicator" Property="Fill" Value="red"/>
+                            <!--<Setter TargetName="Indicator" Property="Height" Value="20"/>-->
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Indicator" Property="Fill" Value="{DynamicResource PrimaryBlueColor}"/>
+                            <Setter TargetName="Indicator" Property="Height" Value="4"/>
+                            <Setter TargetName="btnSelected" Property="Background" Value="{DynamicResource SecundaryGrayColor}"/>
+                            <Setter TargetName="txtName" Property="Foreground" Value="{DynamicResource PrimaryBlueColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="TextBlockBackGround" TargetType="{x:Type TextBlock}">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="MouseDown">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color" From="Yellow" To="Black" Duration="0:0:0.10"></ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetProperty="Background.Color" From="Black" To="Yellow" Duration="0:0:0.10"></ColorAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+                
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="VolumeStyle" TargetType="{x:Type ProgressBar}">
+        <Setter Property="Foreground" Value="#FFB00606"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid x:Name="TemplateRoot">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                        <Rectangle x:Name="PART_Track"/>
+                        <Grid x:Name="PART_Indicator" ClipToBounds="True" HorizontalAlignment="Left">
+                            <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" RadiusX="5" RadiusY="3"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TogleCheckStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid >
+                            <Border x:Name="backbor" Width="45" Height="20" Background="{DynamicResource SecundaryGrayColor}" CornerRadius="10" Margin="5,0" BorderThickness="1" BorderBrush="{DynamicResource PrimaryBlueColor}"></Border>
+                            <Border x:Name="button" Height="15" Width="15" CornerRadius="12.5" HorizontalAlignment="Left"  Margin="10 0 0 0" ></Border>
+                        </Grid>
+                        <ContentPresenter x:Name="content" Margin="10,0,0,0" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="right">
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.2" From="10,0,0,0" To="28,0,0,0" >
+                                <ThicknessAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </ThicknessAnimation.EasingFunction>
+                            </ThicknessAnimation>
+                        </Storyboard>
+                        <Storyboard x:Key="left">
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="button" Duration="0:0:0.2" From="28,0,0,0" To="10,0,0,0" >
+                                <ThicknessAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </ThicknessAnimation.EasingFunction>
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="false">
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="leftt"></RemoveStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource right}" x:Name="rightt" ></BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="button" Property="Background" Value="#757575"></Setter>
+                            <Setter TargetName="backbor" Property="Background" Value="{DynamicResource  SecundaryGrayColor}"/>
+                            <Setter TargetName="backbor" Property="BorderThickness" Value="2"/>
+                            <Setter TargetName="backbor" Property="BorderBrush" Value="{DynamicResource SecundaryBlueColor }"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="rightt"></RemoveStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource left}" x:Name="leftt" ></BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="button" Property="Background" Value="{DynamicResource PrimaryBlueColor}"></Setter>
+                            <Setter TargetName="backbor" Property="BorderBrush" Value="{DynamicResource PrimaryBlueColor }"/>
+                            <Setter TargetName="backbor" Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                            <Setter TargetName="backbor" Property="BorderThickness" Value="1"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--SCROLLBARS THUMBS-->
+    <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="Grid">
+                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" 
+                                           Height="Auto" Fill="Transparent"/>
+                        <Border x:Name="Rectangle1" CornerRadius="10 0 0 10" HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch" Width="Auto" Height="Auto" 
+                                        Background="{TemplateBinding Background}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="Horizontal">
+                            <Setter TargetName="Rectangle1" Property="Width" Value="Auto"/>
+                            <Setter TargetName="Rectangle1" Property="Height" Value="7"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--SCROLLBARS-->
+    <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlueColor}"/>
+        <Setter Property="Background" Value="{DynamicResource SecundaryBackgroundColor}"/>
+        <Setter Property="Width" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="GridRoot" Width="12" Background="{x:Null}">
+                        <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False">
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
+                                               Style="{DynamicResource ScrollThumbs}"/>
+                            </Track.Thumb>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
+                            </Track.IncreaseRepeatButton>
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
+                            </Track.DecreaseRepeatButton>
+                        </Track>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
+                            <Setter Value="{DynamicResource SecundaryBlueColor}" 
+                                            TargetName="Thumb" Property="Background"/>
+                        </Trigger>
+                        <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
+                            <Setter Value="{DynamicResource PrimaryBlueColor}" TargetName="Thumb" Property="Background"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Width" Value="Auto"/>
+                            <Setter Property="Height" Value="12"/>
+                            <Setter TargetName="Thumb" Property="Tag" Value="Horizontal"/>
+                            <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand"/>
+                            <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
 </ResourceDictionary>

@@ -9,6 +9,26 @@
       Title="SettingsPage">
 
     <Grid>
+        <ScrollViewer Style="{DynamicResource ScrollBar}">
+            <Border CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}">
+                <StackPanel>
+                    <TextBlock Text="Настройки клиента" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" Foreground="{DynamicResource TextPrimaryColor}"/>
+                    <TextBlock Text="Тема приложения" Foreground="{DynamicResource TextPrimaryColor}" Background="{Binding PrimaryBackgroundColor}" Margin="20 20 0 0" FontSize="20" Height="auto" Width="auto" Cursor="" ></TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Cursor="">
+                        <RadioButton x:Name="rdDarkTheme"  Content="Темная" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Click="rdDarkTheme_Click"></RadioButton>
+                        <RadioButton x:Name="rdLightTheme" Content="Светлая" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Click="rdLightTheme_Click"></RadioButton>
+                        <RadioButton x:Name="rdSystemTheme" Content="Системная" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Cursor="Hand" ></RadioButton>
+
+                    </StackPanel>
+                    <CheckBox Name="TogleChekSet" Style="{DynamicResource TogleCheckStyle}"></CheckBox>
+                    <Image Height="1000" Source="Assets/Avatars/avatar-2.png" />
+                </StackPanel>
+                
+            </Border>
+            
+        </ScrollViewer>
+       
         
     </Grid>
 </Page>

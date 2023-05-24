@@ -9,7 +9,8 @@
         Title="YokaruUI" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowState="Normal" MouseLeftButtonDown="dragMe">
+        ResizeMode="NoResize"
+        WindowState="Normal" MouseLeftButtonDown="dragMe">
     <Window.Resources>
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -19,7 +20,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RepeatButton">
-                        <Border  BorderThickness="1" BorderBrush="White" Background="#df24b4 " Height="4"/>
+                        <Border  BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="#df24b4 " Height="4"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -109,7 +110,7 @@
                     <!-- Logo -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
                         <Path Data="{DynamicResource logo}" Margin="16 0 0 0" Stretch="Fill" Fill="{DynamicResource PrimaryBlueColor}" Width="25" Height="25" HorizontalAlignment="Left"/>
-                        <Label Content="Yamux" Foreground="{DynamicResource PrimaryBlueColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="14 0 0 0"/>
+                        <Label Content="Yokaru" Foreground="{DynamicResource PrimaryBlueColor}" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="14 0 0 0"/>
                     </StackPanel>
 
                     <!-- Menu -->
@@ -151,11 +152,13 @@
                     </ToggleButton>
 
                     <StackPanel Grid.Row="3" Cursor="">
-                        <RadioButton x:Name="rdHome" IsChecked="True" Content="Главное" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}" Command="{Binding OpenHomePage}" Click="rdHome_Click" Cursor="Hand"/>
-                        <RadioButton x:Name="rdSounds" Content="Треки" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Command="{Binding OpenSoundsPage}" Margin="0 5 0 5" Click="rdSounds_Click"/>
+                        <RadioButton x:Name="rdHome" IsChecked="True" Content="Главное" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource home}"  Click="rdHome_Click" Cursor="Hand"/>
+                        <RadioButton x:Name="rdSounds" Content="Треки" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}"  Margin="0 5 0 5" Click="rdSounds_Click"/>
                         <RadioButton x:Name="rdNotes" Content="Подкасты и книги" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource notes}" Click="rdNotes_Click"/>
                         <RadioButton x:Name="rdUsersMusic" Content="Моя библиотека" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource UserProdileMusic}" Click="rdUsersMusic_Click"/>
                         <RadioButton x:Name="rdSettings" Content="Настройки" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource Settings}" Click="rdSettings_Click"/>
+                        <RadioButton x:Name="rdApplicationInfo" Content="Информация" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource ApplicatioInfo}" Click="rdApplicationInfo_Click" Cursor="Hand"/>
+
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
@@ -211,9 +214,9 @@
                             <StackPanel Orientation="Vertical" Cursor="">
                                 <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
                                     <StackPanel Height="20" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <TextBlock Name="CurentTimeTBl" Margin="5" VerticalAlignment="Center" TextAlignment="Center">0:00</TextBlock>
+                                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" Name="CurentTimeTBl" Margin="5" VerticalAlignment="Center" TextAlignment="Center">0:00</TextBlock>
                                         <Slider x:Name="SliderMusic" IsMoveToPointEnabled="True"  Margin="5" Width="860"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center"></Slider>
-                                        <TextBlock TextAlignment="Center" VerticalAlignment="Center" Margin="5" Name="TotalLenTBl">3:00</TextBlock>
+                                        <TextBlock Foreground="{DynamicResource TextPrimaryColor}" TextAlignment="Center" VerticalAlignment="Center" Margin="5" Name="TotalLenTBl">3:00</TextBlock>
                                     </StackPanel>
                                 </Border>
 
@@ -253,7 +256,15 @@
                             <Button Margin="0 15 40 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Repeat}" Cursor="Hand"></Button>
 
                             <Button Margin="0 15 80 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Shuffle}" Cursor="Hand"></Button>
-                            <Button Margin="0 15 120 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Hq}" Cursor="Hand"></Button>
+                            <Button Margin="0 15 120 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Hq}" Cursor="Hand">
+                                <Button.ToolTip>
+                                    <ToolTip Height="200" Width="40" Cursor="">
+                                        <Slider x:Name="SliderMusicVolume" IsMoveToPointEnabled="True"  Margin="5" Width="40" Orientation="Vertical"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor=""></Slider>
+
+                                    </ToolTip>
+
+                                </Button.ToolTip>
+                            </Button>
 
 
                         </Grid>

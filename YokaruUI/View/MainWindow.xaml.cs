@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,61 @@ namespace YokaruUI
     public partial class MainWindow : Window
     {
         public bool stwsd = true;
+        private double _volume;
+        private bool mouseCaptured = false;
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
+        //public double Volume
+        //{
+        //    get { return _volume; }
+        //    set
+        //    {
+        //        _volume = value;
+        //        OnPropertyChanged("Volume");
+        //    }
+        //}
+
+       
+
+        //private void MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (Mouse.LeftButton == MouseButtonState.Pressed && mouseCaptured)
+        //    {
+        //        var x = e.GetPosition(volumeBar).X;
+        //        var ratio = x / volumeBar.ActualWidth;
+        //        Volume = ratio * volumeBar.Maximum;
+        //    }
+        //}
+
+        //private void MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    mouseCaptured = true;
+        //    var x = e.GetPosition(volumeBar).X;
+        //    var ratio = x / volumeBar.ActualWidth;
+        //    Volume = ratio * volumeBar.Maximum;
+        //}
+
+        //private void MouseUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    mouseCaptured = false;
+        //}
+
+        //#region Property Changed
+
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //private void OnPropertyChanged(string propertyName)
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        //#endregion
+
         private void dragMe(object sender, MouseButtonEventArgs e)
         {
             try
@@ -88,13 +140,33 @@ namespace YokaruUI
         {
             if(stwsd == true)
             {
+                if (((App)Application.Current).LightTheme == true)
+                {
+                    btnPlayPause.Foreground = new SolidColorBrush(Colors.Transparent);
+                }
+                if (((App)Application.Current).LightTheme == false)
+                {
+                    btnPlayPause.Foreground = new SolidColorBrush(Colors.Transparent);
+                }
                 btnPlayPause.Content = FindResource("Play");
-                stwsd= false;
+               
+                //btnPlayPause.Style = Style.Resources.FindName("IconButtonsMusicStyle");    //FindResource("IconButtonsMusicStyle");
+                stwsd = false;
             
             }
             else
             {
                 btnPlayPause.Content = FindResource("Pause");
+              
+                if (((App)Application.Current).LightTheme == true)
+                {
+                    btnPlayPause.Background = new SolidColorBrush(Colors.Transparent);
+                }
+                if (((App)Application.Current).LightTheme == false)
+                {
+                    btnPlayPause.Background = new SolidColorBrush(Colors.Transparent);
+                }
+                btnPlayPause.Background= new SolidColorBrush(Colors.Red);
                 stwsd = true;
             }
           
@@ -107,6 +179,11 @@ namespace YokaruUI
         }
 
         private void rdSettings_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("View/Pages/SettingsPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void rdApplicationInfo_Click(object sender, RoutedEventArgs e)
         {
 
         }
