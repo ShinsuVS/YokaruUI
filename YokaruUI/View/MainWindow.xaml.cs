@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace YokaruUI
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-   
+
     public partial class MainWindow : Window
     {
         public bool stwsd = true;
@@ -43,7 +44,7 @@ namespace YokaruUI
         //    }
         //}
 
-       
+
 
         //private void MouseMove(object sender, MouseEventArgs e)
         //{
@@ -138,38 +139,23 @@ namespace YokaruUI
 
         private void btnPlayPause_Click(object sender, RoutedEventArgs e)
         {
-            if(stwsd == true)
+            if (stwsd == true)
             {
-                if (((App)Application.Current).LightTheme == true)
-                {
-                    btnPlayPause.Foreground = new SolidColorBrush(Colors.Transparent);
-                }
-                if (((App)Application.Current).LightTheme == false)
-                {
-                    btnPlayPause.Foreground = new SolidColorBrush(Colors.Transparent);
-                }
+
                 btnPlayPause.Content = FindResource("Play");
-               
+
                 //btnPlayPause.Style = Style.Resources.FindName("IconButtonsMusicStyle");    //FindResource("IconButtonsMusicStyle");
                 stwsd = false;
-            
+
             }
             else
             {
                 btnPlayPause.Content = FindResource("Pause");
-              
-                if (((App)Application.Current).LightTheme == true)
-                {
-                    btnPlayPause.Background = new SolidColorBrush(Colors.Transparent);
-                }
-                if (((App)Application.Current).LightTheme == false)
-                {
-                    btnPlayPause.Background = new SolidColorBrush(Colors.Transparent);
-                }
-                btnPlayPause.Background= new SolidColorBrush(Colors.Red);
+
+
                 stwsd = true;
             }
-          
+
 
         }
 
@@ -186,6 +172,29 @@ namespace YokaruUI
         private void rdApplicationInfo_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Registration_Click(object sender, RoutedEventArgs e)
+        {
+            var destinationurl = "https://passport.yandex.ru/auth/reg?origin=music_button-header&retpath=https%3A%2F%2Fmusic.yandex.ru%2Fsettings%3Freqid%3D681003997166846339441180892017690396%26from-passport";
+            var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl){ UseShellExecute = true,};
+            System.Diagnostics.Process.Start(sInfo);
+
+        }
+
+        private void VolumeControl_Click(object sender, RoutedEventArgs e)
+        {
+            pVolume.IsOpen= true;
+        }
+
+        private void home_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imgs_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("View/Pages/AuthPage.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

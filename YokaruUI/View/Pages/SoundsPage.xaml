@@ -9,6 +9,32 @@
       Title="SoundsPage">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="0">
+            <TextBlock Height="20" Width="60"  Text="Liked Tracks" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ScrollViewer Margin="0,20,0,0" >
+                <StackPanel Name="stackpanel" Orientation="Vertical" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                </StackPanel>
+            </ScrollViewer>
+
+
+
+
+        </Grid>
         
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+
+
+        </Grid>
     </Grid>
 </Page>

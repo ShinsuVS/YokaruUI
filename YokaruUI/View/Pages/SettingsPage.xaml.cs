@@ -26,7 +26,7 @@ namespace YokaruUI.View.Pages
             if (((App)Application.Current).LightTheme == true) { rdLightTheme.IsChecked = true; }
             else rdDarkTheme.IsChecked = true; 
 
-            TogleChekSet.IsChecked = true;
+            TogleChekSetEx.IsChecked = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

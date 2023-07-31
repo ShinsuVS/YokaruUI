@@ -15,14 +15,39 @@
                     <TextBlock Text="Настройки клиента" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" Foreground="{DynamicResource TextPrimaryColor}"/>
                     <TextBlock Text="Тема приложения" Foreground="{DynamicResource TextPrimaryColor}" Background="{Binding PrimaryBackgroundColor}" Margin="20 20 0 0" FontSize="20" Height="auto" Width="auto" Cursor="" ></TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Cursor="">
+                    <StackPanel Orientation="Horizontal" Cursor="" Margin="20 20 0 0 ">
                         <RadioButton x:Name="rdDarkTheme"  Content="Темная" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Click="rdDarkTheme_Click"></RadioButton>
                         <RadioButton x:Name="rdLightTheme" Content="Светлая" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Click="rdLightTheme_Click"></RadioButton>
                         <RadioButton x:Name="rdSystemTheme" Content="Системная" Style="{DynamicResource SettingsSelectorRadioButtonStyle}" Cursor="Hand" ></RadioButton>
 
                     </StackPanel>
-                    <CheckBox Name="TogleChekSet" Style="{DynamicResource TogleCheckStyle}"></CheckBox>
-                    <Image Height="1000" Source="Assets/Avatars/avatar-2.png" />
+                    <DockPanel  Margin="20 20 0 0 ">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Ограничивать доступ к контенут, не подходящему для детей" Foreground="{DynamicResource TextPrimaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="15" Height="auto" Width="auto" Cursor="" ></TextBlock>
+                            <TextBlock Text="Треки и подкасты с пометкой E(Explicit) будут пропусткаться." Foreground="{DynamicResource TextSecundaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="12" Height="auto" Width="auto" Cursor="" ></TextBlock>
+
+                        </StackPanel>
+                        <CheckBox  Name="TogleChekSetEx" HorizontalAlignment="Right" Style="{DynamicResource TogleCheckStyle}" Cursor=""></CheckBox>
+
+                    </DockPanel>
+                    <DockPanel  Margin="20 20 0 0 ">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Бесконечный поток музыки" Foreground="{DynamicResource TextPrimaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="15" Height="auto" Width="auto" Cursor="" ></TextBlock>
+                            <TextBlock Text="Когда ваша музыка заканчивается, мы включаем поток с похожими треками." Foreground="{DynamicResource TextSecundaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="12" Height="auto" Width="auto" Cursor="" ></TextBlock>
+
+                        </StackPanel>
+                        <CheckBox  Name="TogleChekSetInf" HorizontalAlignment="Right" Style="{DynamicResource TogleCheckStyle}" Cursor=""></CheckBox>
+
+                    </DockPanel>
+                    <!--<DockPanel  Margin="20 20 0 0 ">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Ограничивать доступ к контенут, не подходящему для детей" Foreground="{DynamicResource TextPrimaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="15" Height="auto" Width="auto" Cursor="" ></TextBlock>
+                            <TextBlock Text="Треки и подкасты с пометкой E(Explicit) будут пропусткаться." Foreground="{DynamicResource TextSecundaryColor}" Background="{Binding PrimaryBackgroundColor}"  FontSize="12" Height="auto" Width="auto" Cursor="" ></TextBlock>
+
+                        </StackPanel>
+                        <CheckBox  Name="TogleChekSetEx" HorizontalAlignment="Right" Style="{DynamicResource TogleCheckStyle}" Cursor=""></CheckBox>
+
+                    </DockPanel>-->
                 </StackPanel>
                 
             </Border>

@@ -11,6 +11,138 @@
                     
                      />
     </Storyboard>
+
+    <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border  BorderThickness="1" BorderBrush="{DynamicResource PrimaryBackgroundColor}" Background="#df24b4 " Height="Auto" Width="4"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border SnapsToDevicePixels="True" Background="#1043f3"  BorderThickness="1" Height="Auto" BorderBrush="#2456df" Width="4"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderThumb" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <!--Add name to ellipse to use in  controltemplate triggers-->
+                    <Ellipse x:Name="Ellipse" Height="10" Width="10" Fill="#FFFD4985"></Ellipse>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Ellipse" Property="Fill" Value="#1043f3"></Setter>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SSCS" TargetType="{x:Type Slider}">
+        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"/>
+        <Setter Property="Orientation" Value="Vertical"/>
+        <Setter Property="IsMoveToPointEnabled" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"  />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"/>
+                        <Track x:Name="PART_Track"
+                           Grid.Row="1"
+                           Margin="0"
+                           IsDirectionReversed="True"
+                           Minimum="{TemplateBinding Minimum}"
+                           Maximum="{TemplateBinding Maximum}"
+                           Value="{TemplateBinding Value}">
+                           
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource SliderThumb}"  />
+                            </Track.Thumb>
+                           
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="VerticalSliderStyle" TargetType="{x:Type Slider}" >
+        <Setter Property="Background" Value="#EFEFEF"/>
+        <Setter Property="BorderBrush" Value="#BDBDBD"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Minimum" Value="0"/>
+        <Setter Property="Maximum" Value="100"/>
+        <Setter Property="Value" Value="50"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Top half of slider --><!--
+                        <Border Grid.Row="0" Background="{TemplateBinding Background}" CornerRadius="5,5,0,0"/>
+                        --><!-- Thumb --><!--
+                        <Thumb x:Name="Thumb" Grid.Row="1" Width="20" Height="40" Background="#2196F3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Center">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                    <Ellipse Fill="{TemplateBinding Background}"   Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"/>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                        --><!-- Bottom half of slider --><!--
+                        <Border Grid.Row="2" Background="{TemplateBinding Background}" CornerRadius="0,0,5,5"/>-->
+                        <Track Grid.Row="1" x:Name="PART_Track"   >
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                            </Track.DecreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource SliderThumb}"  />
+                            </Track.Thumb>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                            </Track.IncreaseRepeatButton>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
     <!-- Start: Button | Minimize | Maximize | Close -->
     <Style x:Key="IconButtonsStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent"/>
@@ -109,6 +241,7 @@
                             <Setter Property="Background" Value="#6838e5"/>
                             <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
                             
+                                    
 
                         </MultiTrigger>
                         
@@ -117,6 +250,48 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+    <Style x:Key="IconButtonVolumeMusicStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <!--Borderbutton-->
+                    <Border Name="bd" CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Path Name="ico" Data="{TemplateBinding Content}" Fill="{DynamicResource ActionIconColor}" Height="15" Width="15" Stretch="Uniform"/>
+
+                       
+                    </Border>
+
+                   
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SecundaryBackgroundColor}"/>
+                        </Trigger>
+                       
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True"/>
+                                <Condition Property="Tag" Value="Volume"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="#6838e5"/>
+                            <Setter TargetName="ico" Property="Fill" Value="{DynamicResource PrimaryBackgroundColor}"/>
+
+
+
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- End: Button | Next | Previous | Play | Pause | -->
 
     <Style x:Key="ButtonLabel" TargetType="Button">
@@ -452,6 +627,111 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ModernFlatTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBlueColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryColor}"/>
+        <Setter Property="Padding" Value="10,5,10,5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="40"/>
+     
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border 
+                        CornerRadius="5"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+
+                            <TextBox x:Name="PART_TextBox"
+                                 Text="{TemplateBinding Text}"    
+                                 Padding="{TemplateBinding Padding}"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 FontSize="{TemplateBinding FontSize}"
+                                 Height="{TemplateBinding Height}"
+                                 MinWidth="120"
+                                 CaretBrush="#333333"
+                                 >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_TextBox, Path=Text.IsEmpty}" Value="True">
+                                                <Setter Property="Text" Value="Prompt..."/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <Border x:Name="PART_Border"
+                                Background="#333333"
+                                Height="2"
+                                Margin="0,0,0,5"
+                                VerticalAlignment="Bottom"
+                                Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PART_Border" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="#0099FF"/>
+                            <Setter Property="Text" Value=""/>
+                        </Trigger>
+                       
+                      
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
 
 
+    <Style x:Key="ModernFlatPasswordBox" TargetType="{x:Type PasswordBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBlueColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryColor}"/>
+        <Setter Property="Padding" Value="10,5,10,5"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type  PasswordBox}">
+                    <Border 
+                        CornerRadius="5"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <PasswordBox x:Name="PART_TextBox"
+                                 Padding="{TemplateBinding Padding}"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 FontSize="{TemplateBinding FontSize}"
+                                 Height="{TemplateBinding Height}"
+                                 MinWidth="120"
+                                 CaretBrush="#333333"/>
+                            <Border x:Name="PART_Border"
+                                Background="#333333"
+                                Height="2"
+                                Margin="0,0,0,5"
+                                VerticalAlignment="Bottom"
+                                Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PART_Border" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="#0099FF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

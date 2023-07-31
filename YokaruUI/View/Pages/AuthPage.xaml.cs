@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YokaruUI.Model;
 
 namespace YokaruUI.View.Pages
 {
@@ -23,6 +24,21 @@ namespace YokaruUI.View.Pages
         public AuthPage()
         {
             InitializeComponent();
+        }
+
+        private void AuthClick_Click(object sender, RoutedEventArgs e)
+        {
+            //Player pw = new Player();
+            MessageBox.Show(Convert.ToString(LoginTBText.Text) + Convert.ToString(PasswordPBText.Password));
+            ((App)Application.Current).AuthToYandex(Convert.ToString(LoginTBText.Text), Convert.ToString(PasswordPBText.Password));
+
+
+        }
+
+        private void TextBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if(LoginTBText.Text == "Login")
+            LoginTBText.Text = "";
         }
     }
 }

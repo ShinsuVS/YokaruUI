@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
         ResizeMode="NoResize"
-        WindowState="Normal" MouseLeftButtonDown="dragMe">
+        WindowState="Normal" MouseLeftButtonDown="dragMe"
+        ContentRendered="home_ContentRendered">
     <Window.Resources>
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -77,6 +78,7 @@
                 </Track>
             </Grid>
         </ControlTemplate>
+       
 
         <Style x:Key="Horizontal_Slider" TargetType="Slider">
             <Setter Property="Focusable" Value="False"/>
@@ -162,14 +164,14 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
-                        <Ellipse Width="40" Height="40" Margin="10 0 0 0">
+                        <Ellipse Width="40" Height="40" Margin="10 0 0 0" MouseDown="imgs_MouseDown" >
                             <Ellipse.Fill>
-                                <ImageBrush x:Name="imgs" ImageSource="Assets/Avatars/avatar-2.png"/>
+                                <ImageBrush  x:Name="imgs" ImageSource="Assets/Avatars/avatar-2.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
                         <StackPanel Orientation="Vertical" Margin="8 0 0 0">
                             <Button Name="Auth" Content="Авторизация" Foreground="{DynamicResource TextPrimaryColor}" Style="{DynamicResource ButtonLabel}"  FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Auth_Click" />
-                            <Button Content="Регистрация" Foreground="{DynamicResource PrimaryGrayColor}" Style="{DynamicResource ButtonLabel}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                            <Button Name="Registration" Click="Registration_Click" Content="Регистрация" Foreground="{DynamicResource PrimaryGrayColor}" Style="{DynamicResource ButtonLabel}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -235,8 +237,8 @@
                                         </Button.RenderTransform>
                                     </Button>
                                     <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal" Width="200" Margin="0 0 0 0">
-                                        <Image Width="40" Height="40" Margin="10 0 0 0" Source="Assets/Avatars/note1.png">
-
+                                        <Image Width="40" Height="40" Margin="10 0 0 0"   Source="Assets/Avatars/note1.png">
+                                           
                                         </Image>
                                         <StackPanel Orientation="Vertical" Margin="8 0 0 0">
                                             <Button  Content="Название" Foreground="{DynamicResource TextPrimaryColor}" Style="{DynamicResource ButtonLabel}"  FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0"  />
@@ -252,19 +254,31 @@
                             </StackPanel>
 
 
-                            <Button Margin="0 15 0 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource VolumeZero}" Cursor="Hand"></Button>
+                            <Button   Name="VolumeControl" Click="VolumeControl_Click"  Margin="0 15 0 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonVolumeMusicStyle}" Content="{DynamicResource VolumeZero}" Cursor="Hand">
+                               
+                            </Button>
+                            <Popup Name="pVolume" Height="60" Width="200" PlacementTarget="{Binding ElementName=VolumeControl}"  StaysOpen="False" Placement="Top"  MaxWidth="150"
+                                 PopupAnimation="Slide" AllowsTransparency="True" >
+                                <Border BorderBrush="{DynamicResource PrimaryBlueColor}" CornerRadius ="5"  BorderThickness="2" Background="{DynamicResource SecundaryBackgroundColor}">
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Slider x:Name="SliderMusicVolume"  Height="20" Width="100" Minimum="0" Maximum="100" Value="50"  Style="{StaticResource Horizontal_Slider}"  Cursor="">
+                                            <Slider.ToolTip>
+                                                <ToolTip Content="{Binding RelativeSource={RelativeSource Self},
+                                                 Path=PlacementTarget.Value}"
+                                                 ContentStringFormat="Blue: {0:0}" />
+                                            </Slider.ToolTip>
+                                        </Slider>
+                                        <Button  Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Hq}" Cursor="Hand"/>
+
+                                    </StackPanel>
+                                   
+                                </Border>
+                            </Popup>
                             <Button Margin="0 15 40 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Repeat}" Cursor="Hand"></Button>
 
                             <Button Margin="0 15 80 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Shuffle}" Cursor="Hand"></Button>
-                            <Button Margin="0 15 120 0" Width="40" HorizontalAlignment="Right" Tag="Volume" Style="{StaticResource IconButtonsMusicStyle}" Content="{DynamicResource Hq}" Cursor="Hand">
-                                <Button.ToolTip>
-                                    <ToolTip Height="200" Width="40" Cursor="">
-                                        <Slider x:Name="SliderMusicVolume" IsMoveToPointEnabled="True"  Margin="5" Width="40" Orientation="Vertical"   Style="{StaticResource Horizontal_Slider}" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor=""></Slider>
 
-                                    </ToolTip>
 
-                                </Button.ToolTip>
-                            </Button>
 
 
                         </Grid>
