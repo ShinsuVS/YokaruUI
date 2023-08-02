@@ -13,6 +13,7 @@ using YandexMusicApi;
 using YandexMusicApi.Api;
 using YandexMusicApi.Auth;
 using YandexMusicApi.Network;
+using YokaruUI.Model;
 
 namespace YokaruUI
 {
@@ -30,6 +31,9 @@ namespace YokaruUI
         public string tokenAuth;
         public string loginAuth;
         public string PassAuth;
+        public APiContainer container = new APiContainer();
+      
+
         public bool AuthComplete
         {
             get { if(tokenAuth == null)
@@ -53,38 +57,6 @@ namespace YokaruUI
 
 
 
-        public async void AuthToYandex(string log, string pass)
-        {
-            NetworkParams networkParams = new NetworkParams() { }; // Creating an object of class NetworkParams, if necessary you can specify there proxy and UserAgent to use in requests.
-            Token tokenObject = new Token(log, pass, networkParams);
-            var result = await tokenObject.LoginUsername(); // Send Username to get authorization options
-            loginAuth = log; PassAuth = pass;
-            if (result.Data["preferred_auth_method"].ToString() == "password") // If the best authorization option is a password
-            {
-                result = await tokenObject.LoginPassword(); // Starting authorization by password
-                var tokens = await tokenObject.GetToken(result.Data["retpath"].ToString()); // Getting a token   
-                                                                                           // MessageBox.Show(Convert.ToString(token));
-
-                var definition = new { token = "" };
-                var curlToken = JsonConvert.DeserializeAnonymousType(Convert.ToString(tokens), definition);
-               
-
-                AuthComplete = true;
-                tokenAuth = curlToken.token;
-
-
-                MessageBox.Show("Авторизация успешно пройдена.");
-
-                //Navigated(new System.Uri("View/Pages/SoundsPage.xaml", UriKind.RelativeOrAbsolute));
-                ((MainWindow)Application.Current.MainWindow).PagesNavigation.NavigationService.Navigate(new System.Uri("View/Pages/SoundsPage.xaml", UriKind.RelativeOrAbsolute));
-                //((MainWindow)Application.Current.MainWindow).imgs.ImageSource = new BitmapImage();
-            }
-
-
-
-
-
-
-        }
+       
     }
 }

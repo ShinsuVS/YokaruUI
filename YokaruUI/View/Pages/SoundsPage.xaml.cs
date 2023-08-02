@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +20,7 @@ using YandexMusicApi;
 using YandexMusicApi.Api;
 using YandexMusicApi.Auth;
 using YandexMusicApi.Network;
+using YokaruUI.Model;
 
 namespace YokaruUI.View.Pages
 {
@@ -29,42 +32,63 @@ namespace YokaruUI.View.Pages
         public SoundsPage()
         {
             InitializeComponent();
-            chc();
-            if (((App)Application.Current).AuthComplete == true)
-            {
-                NetworkParams networkParams = new NetworkParams();
-                Token tokenObject = new Token(((App)Application.Current).loginAuth, ((App)Application.Current).PassAuth, networkParams);
-                var token = ((App)Application.Current).tokenAuth;
-                var ACInfo = new Default(networkParams, token);
-                var info = ACInfo.GetAllFeed().Result.ToString();
-                
-                //var definition = new { uid = "" };
-                //var customer1 = JsonConvert.DeserializeAnonymousType(Convert.ToString(info), definition);
-                //MessageBox.Show(info);
 
+            ((App)Application.Current).container.getLikedTracksFromApi();
 
-
-
-                //var aacc = new Default(networkParams, customer1.token.ToString());
-                //string srds = aacc.GetChart().Result.ToString();
-                //string path = AppDomain.CurrentDomain.BaseDirectory;
-                //path = path.Substring(0, path.IndexOf("bin")) + "TextFile1.txt";
-                //StreamWriter sw = new StreamWriter(path);
-                //sw.WriteLine(srds);
-                //Console.WriteLine(srds);
-            }
-
-
-        }
-
-
-
-
-
-        public async void chc()
-        {
            
+
+            //var sk = IsWpfApplication();
+
+            //MessageBox.Show(sk.ToString());
+            //if (((App)Application.Current).AuthComplete == true)
+            //{
+            //    NetworkParams networkParams = new NetworkParams();
+            //    Token tokenObject = new Token(((App)Application.Current).loginAuth, ((App)Application.Current).PassAuth, networkParams);
+            //    var token = ((App)Application.Current).tokenAuth;
+            //    var ACInfo = new Default(networkParams, token);
+            //    string info = ACInfo.GetAllFeed().Result.ToString();
+
+            //    MessageBox.Show(info);
+
+
+
+            //    //Trace.WriteLine("Example");
+            //    //var definition = new { uid = "" };
+            //    //var customer1 = JsonConvert.DeserializeAnonymousType(Convert.ToString(info), definition);
+            //    //MessageBox.Show(info);
+
+
+
+
+            //    //var aacc = new Default(networkParams, customer1.token.ToString());
+            //    //string srds = aacc.GetChart().Result.ToString();
+            //    //string path = AppDomain.CurrentDomain.BaseDirectory;
+            //    //path = path.Substring(0, path.IndexOf("bin")) + "TextFile1.txt";
+            //    //StreamWriter sw = new StreamWriter(path);
+            //    //sw.WriteLine(srds);
+            //    //Console.WriteLine(srds);
+            
+
+
         }
+
+
+        //private static bool IsWpfApplication()
+        //{
+        //    Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        //    foreach (var assembly in assemblies)
+        //    {
+        //        if (assembly.FullName.StartsWith("PresentationFramework", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            return true;
+        //        }
+        //    }
+
+        //    return false;
+        //}
+
+
+       
     }
 }
 

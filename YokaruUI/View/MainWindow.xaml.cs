@@ -176,9 +176,16 @@ namespace YokaruUI
 
         private void Registration_Click(object sender, RoutedEventArgs e)
         {
-            var destinationurl = "https://passport.yandex.ru/auth/reg?origin=music_button-header&retpath=https%3A%2F%2Fmusic.yandex.ru%2Fsettings%3Freqid%3D681003997166846339441180892017690396%26from-passport";
-            var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl){ UseShellExecute = true,};
-            System.Diagnostics.Process.Start(sInfo);
+            if(Registration.Content == "Регистрация"){
+                var destinationurl = "https://passport.yandex.ru/auth/reg?origin=music_button-header&retpath=https%3A%2F%2Fmusic.yandex.ru%2Fsettings%3Freqid%3D681003997166846339441180892017690396%26from-passport";
+                var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl) { UseShellExecute = true, };
+                System.Diagnostics.Process.Start(sInfo);
+            }
+            if(Registration.Content == "Выйти")
+            {
+                
+            }
+           
 
         }
 
@@ -195,6 +202,19 @@ namespace YokaruUI
         private void imgs_MouseDown(object sender, MouseButtonEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("View/Pages/AuthPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+        public void changeImgs( string Url)
+        {
+           
+            Uri _Url = new Uri("https://avatars.yandex.net/get-yapic/" + Url + "/islands-middle");
+            imgs.ImageSource = new BitmapImage(_Url);
+
+        }
+
+        public void ChangeUser(string display_name)
+        {
+            Auth.Content = display_name;
+            Registration.Content = "Выйти";
         }
     }
 }

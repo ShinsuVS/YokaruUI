@@ -28,9 +28,14 @@ namespace YokaruUI.View.Pages
 
         private void AuthClick_Click(object sender, RoutedEventArgs e)
         {
+
+
+            
+
+            ((App)Application.Current).container.AuthToYandex(Convert.ToString(LoginTBText.Text), Convert.ToString(PasswordPBText.Password));
             //Player pw = new Player();
-            MessageBox.Show(Convert.ToString(LoginTBText.Text) + Convert.ToString(PasswordPBText.Password));
-            ((App)Application.Current).AuthToYandex(Convert.ToString(LoginTBText.Text), Convert.ToString(PasswordPBText.Password));
+            //MessageBox.Show(Convert.ToString(LoginTBText.Text) + Convert.ToString(PasswordPBText.Password));
+           // ((App)Application.Current).AuthToYandex(Convert.ToString(LoginTBText.Text), Convert.ToString(PasswordPBText.Password));
 
 
         }
